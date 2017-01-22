@@ -4,9 +4,9 @@
       <aside>
         <div class="nav-title">后台管理系统</div>
         <ul class="nav nav-pills nav-stacked" role="tablist">
-          <li role="presentation" class="active"><a href="#"><i class="glyphicon glyphicon-list-alt"></i>文章管理</a></li>
-          <li role="presentation"><a href="#"><i class="glyphicon glyphicon-stats"></i>数据统计</a></li>
-          <li role="presentation"><a href="#"><i class="glyphicon glyphicon-link"></i>友情链接</a></li>
+          <router-link to="/article" active-class="active" tag="li"><a href="#"><i class="glyphicon glyphicon-list-alt"></i>文章管理</a></router-link>
+          <router-link to="/stat" active-class="active" tag="li"><a href="#"><i class="glyphicon glyphicon-list-alt"></i>数据统计</a></router-link>
+          <router-link to="/link" active-class="active" tag="li"><a href="#"><i class="glyphicon glyphicon-list-alt"></i>友情链接</a></router-link>
         </ul>
       </aside>
       <div class="content">
@@ -15,7 +15,7 @@
           <a href="javascript:;"><i class="glyphicon glyphicon-off"></i>退出</a>
         </header>
         <div class="container">
-          123
+          <router-view></router-view>
         </div>
       </div>
     </div>
@@ -57,10 +57,14 @@ export default{
     background: #1d1e22;
   }
   #index .content{
+    height: 100%;
     flex: 9;
     background: #e7e7e7;
+    display: flex;
+    flex-direction: column;
   }
   #index .content .cheader{
+    position: relative;
     height: 60px;
     background: #fff;
     box-shadow: 0 1px 5px #999;
@@ -68,6 +72,7 @@ export default{
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    z-index: 2;
   }
   #index .content .cheader a{
     color: #333;
@@ -110,5 +115,11 @@ export default{
   }
   .nav-pills i.glyphicon{
     margin-right: 8px;
+  }
+  #index .content>.container{
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+    padding: 0;
   }
 </style>
