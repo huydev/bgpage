@@ -44,16 +44,7 @@
           </div>
         </li>
       </ul>
-      <div class="pagation">
-        <a href="javascript:;" class="btn btn-link">上一页</a>
-        <span class="btn">1</span>
-        <a href="javascript:;" class="btn btn-link">2</a>
-        <a href="javascript:;" class="btn btn-link">3</a>
-        <a href="javascript:;" class="btn btn-link">4</a>
-        <span class="btn">...</span>
-        <a href="javascript:;" class="btn btn-link">20</a>
-        <a href="javascript:;" class="btn btn-link">下一页</a>
-      </div>
+      <pagation @pagaClick="pagaChange" :pagaConf="pagaConfig"></pagation>
     </div>
     <del-alert></del-alert>
   </div>
@@ -61,23 +52,35 @@
 
 <script>
   import alert from './alert';
+  import pagation from './pagation';
   export default{
     data(){
       return{
-
+        pagaConfig:{
+          current: 1,
+          total: 20,
+          showNumber: 5,
+          prevShow: false,
+          nextShow: true,
+          ellipsisShow: true
+        }
       }
     },
     components: {
-      'del-alert': alert
+      'del-alert': alert,
+      'pagation': pagation
+    },
+    methods:{
+      pagaChange(cur){
+        console.log('当前页码：'+ cur);
+      }
     }
   }
 </script>
 
 <style scoped>
-  .container{
-    position: relative;
-  }
   .cwrap{
+    position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -99,8 +102,5 @@
   .article-list .opt{
     border-top: 1px solid #d2d2d2;
     padding: 10px 0 0;
-  }
-  .pagation{
-    text-align: center;
   }
 </style>
