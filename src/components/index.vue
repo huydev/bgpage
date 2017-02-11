@@ -12,7 +12,7 @@
       <div class="content">
         <header class="cheader">
           <a href="javascript:;"><img src="../images/head.png" class="head img-circle" alt="">虐猫狂人薛定谔</a>
-          <a href="javascript:;"><i class="glyphicon glyphicon-off"></i>退出</a>
+          <a href="javascript:;" @click="logout"><i class="glyphicon glyphicon-off"></i>退出</a>
         </header>
         <div class="container">
           <router-view></router-view>
@@ -35,6 +35,12 @@ export default{
       next();
     }else{
       next('/login');
+    }
+  },
+  methods: {
+    logout(){
+      cookie.cookie.remove('login');
+      this.$router.push('/login');
     }
   }
 }

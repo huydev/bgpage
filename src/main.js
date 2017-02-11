@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 
 Vue.use(VueRouter);
+Vue.use(VueResource);
 
 import cookie from 'cookie_js';
 
@@ -27,7 +29,7 @@ const routes = [
       {path: '/article', component: Article},
       {path: '/stat', component: Stat},
       {path: '/link', component: Link},
-      {path: '/editArticle', component: EditArticle}
+      {path: '/editArticle/:id', component: EditArticle}
     ]
   },
   { path: "/", redirect: '/login'}

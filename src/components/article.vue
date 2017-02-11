@@ -1,6 +1,9 @@
 <template>
   <div class="cwrap">
     <div class="container">
+      <div class="optbar">
+        <a href="javascript:;" class="btn btn-default">新增文章</a>
+      </div>
       <ul class="article-list">
         <li>
           <h1>文章标题</h1>
@@ -8,7 +11,7 @@
           <div class="opt">
             <a href="javascript:;" class="btn btn-info">编辑</a>
             <a href="javascript:;" class="btn btn-danger">删除</a>
-            <router-link to="/editArticle">文章管理</router-link>
+            <router-link to="/editArticle/0">文章管理</router-link>
           </div>
         </li>
         <li>
@@ -88,6 +91,7 @@
   }
   .article-list{
     list-style: none;
+    padding: 0;
   }
   .article-list li{
     position: relative;
@@ -102,5 +106,8 @@
   .article-list .opt{
     border-top: 1px solid #d2d2d2;
     padding: 10px 0 0;
+  }
+  .optbar{
+    margin: 20px 0;
   }
 </style>

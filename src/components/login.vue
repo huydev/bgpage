@@ -13,7 +13,7 @@
             <input type="password" class="form-control" id="pwd" @input="clearTips" v-model.trim="pwd" placeholder="请输入密码">
           </div>
           <p class="text-danger">{{ tips }}</p>
-          <button type="button" @click.enter="login" class="btn btn-block btn-success">登录</button>
+          <button type="button" @click="login" class="btn btn-block btn-success">登录</button>
         </form>
       </div>
     </div>
@@ -41,12 +41,20 @@
       login(){
         if(this.name.length === 0 || this.pwd.length === 0){
           this.tips = '用户名或密码不能为空';
-        }else if(this.name === 'admin' && this.pwd === 'admin'){
-          cookie.cookie.set('login', '1');
-          this.$router.push('/index');
-        }else{
-          this.tips = '用户名或密码不正确';
         }
+        var formData = new FormData();
+        formData.append('name', this.name);
+        formData.append('pwd', this.pwd);
+        this.$http.post('http://localhost/blog/login.php', formData).then(res => {
+          res = res.body;
+          if(res.status == 1){
+            console.log('登录成功');
+            cookie.cookie.set('login', 1);
+            this.$router.push('/index');
+          }else{
+            this.tips = res.msg;
+          }
+        });
       },
       clearTips(){
         this.tips = '';

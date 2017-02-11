@@ -11,7 +11,10 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "cookie_js": "^1.2.2",
+    "jquery": "^3.1.1",
     "vue": "^2.1.0",
+    "vue-html5-editor": "^0.5.1",
+    "vue-resource": "^1.2.0",
     "vue-router": "^2.1.1"
   },
   "devDependencies": {
