@@ -2,7 +2,7 @@
   <div class="cwrap">
     <div class="container">
       <div class="optbar">
-        <a href="javascript:;" class="btn btn-default">新增文章</a>
+        <a href="javascript:;" @click="newArticle" class="btn btn-default">新增文章</a>
       </div>
       <ul class="article-list">
         <li>
@@ -76,6 +76,16 @@
     methods:{
       pagaChange(cur){
         console.log('当前页码：'+ cur);
+      },
+      newArticle(){
+        this.$http.jsonp('http://localhost/blog/new.php', {credentials: true}).then(res=>{
+          res = res.body;
+          if(res.status === 1){
+            this.$router.push('/editArticle/new');
+          }else{
+            this.$router.push('/login');
+          }
+        });
       }
     }
   }

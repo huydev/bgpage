@@ -1,7 +1,7 @@
 <template>
   <div class="cwrap">
     <div class="container">
-      <h3>{{ title }}{{ $route.params.id }}</h3>
+      <h3>{{ title }}</h3>
       <form>
         <div class="form-group">
           <label for="title">标题</label>
@@ -24,11 +24,16 @@
   export default{
     data(){
       return{
-        title: '新增文章'
+        title: ''
       }
     },
-    mounted(){
-
+    created(){
+      var param = this.$route.params.id;
+      if(param == 'new'){
+        this.title = '新建文章';
+      }else{
+        this.title = '编辑文章';
+      }
     }
   }
 </script>

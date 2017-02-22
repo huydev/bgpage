@@ -30,18 +30,25 @@ export default{
 
     }
   },
-  beforeRouteEnter(to, from, next){
-    if(cookie.cookie.get('login')){
-      next();
-    }else{
-      next('/login');
-    }
-  },
   methods: {
     logout(){
-      cookie.cookie.remove('login');
-      this.$router.push('/login');
+      this.$http.jsonp('http://localhost/blog/logout.php',{credentials: true}).then(res=>{
+        res = res.body;
+        if(res.status == 1){
+          this.$router.push('/login');
+        }else{
+          this.$router.push('/login');
+        }
+      }); 
     }
+  },
+  mounted(){
+    this.$http.jsonp('http://localhost/blog/islogin.php',{credentials: true}).then(res=>{
+      res = res.body;
+      if(res.status === 0){
+        this.$router.push('/login');
+      }
+    });
   }
 }
 </script>

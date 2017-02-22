@@ -30,26 +30,20 @@
         tips: ''
       }
     },
-    beforeRouteEnter(to, from, next){
-      if(cookie.cookie.get('login')){
-        next('/index');
-      }else{
-        next();
-      }
-    },
     methods: {
       login(){
         if(this.name.length === 0 || this.pwd.length === 0){
           this.tips = '用户名或密码不能为空';
         }
-        var formData = new FormData();
-        formData.append('name', this.name);
-        formData.append('pwd', this.pwd);
-        this.$http.post('http://localhost/blog/login.php', formData).then(res => {
+        this.$http.jsonp('http://localhost/blog/login.php', {
+          params: {
+            name: this.name,
+            pwd: this.pwd
+          }
+        }).then(res => {
           res = res.body;
           if(res.status == 1){
             console.log('登录成功');
-            cookie.cookie.set('login', 1);
             this.$router.push('/index');
           }else{
             this.tips = res.msg;
@@ -59,6 +53,14 @@
       clearTips(){
         this.tips = '';
       }
+    },
+    mounted(){
+      this.$http.jsonp('http://localhost/blog/islogin.php',{credentials: true}).then(res=>{
+        res = res.body;
+        if(res.status === 1){
+          this.$router.push('/index');
+        }
+      });
     }
   }
 </script>
